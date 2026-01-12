@@ -140,6 +140,27 @@ function App() {
     setCampaigns(campaigns.map(c => c.id === id ? { ...c, img: newImage } : c));
   };
 
+  // --- SLIDE HANDLERS
+  const handleAddSlide = () => {
+    const newSlide = {
+      id: Date.now(),
+      image: heroCity, // Default image (you can import a placeholder if you want)
+      title: "NEW CAMPAIGN",
+      subtitle: "SERIES",
+      desc: "Description goes here."
+    };
+    setSlides([...slides, newSlide]);
+  };
+
+  const handleDeleteSlide = (id) => {
+    // Prevent deleting the last slide so the site doesn't break
+    if (slides.length <= 1) {
+      alert("Cannot delete the last slide!");
+      return;
+    }
+    setSlides(slides.filter(s => s.id !== id));
+  };
+
   // --- NAV HANDLERS ---
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -190,6 +211,8 @@ function App() {
               onAddProduct={handleAddProduct} 
               onUpdateProduct={handleUpdateProduct}
               onDeleteProduct={handleDeleteProduct}
+              onAddSlide={handleAddSlide}
+              onDeleteSlide={handleDeleteSlide}
               onUpdateSlide={handleUpdateSlide}
               onUpdateCategory={handleUpdateCategory}
               onUpdateCampaign={handleUpdateCampaign}

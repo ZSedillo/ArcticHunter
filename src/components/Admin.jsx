@@ -67,6 +67,8 @@ const Admin = (props) => {
           <AdminSiteEditor 
              slides={props.slides} 
              onUpdateSlide={props.onUpdateSlide}
+             onAddSlide={props.onAddSlide}
+             onDeleteSlide={props.onDeleteSlide}
              categories={props.categories}
              onUpdateCategory={props.onUpdateCategory}
              campaigns={props.campaigns}
