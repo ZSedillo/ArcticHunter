@@ -6,7 +6,7 @@ import styleImg from '../assets/banner-style.jpg';
 import latestImg from '../assets/banner-latest.jpg';
 import travelImg from '../assets/banner-travel.jpg';
 
-const PromoCarousel = ({ setPage }) => {
+const PromoCarousel = ({ setPage, campaigns }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // The Banners Data

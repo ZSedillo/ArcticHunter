@@ -62,8 +62,18 @@ const Footer = ({ setPage }) => {
       </div>
 
       {/* Copyright Strip */}
+      {/* --- SECRET DOOR SECTION --- */}
       <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest text-zinc-600">
-        <p>&copy; 2026 Arctic Hunter Philippines. All Rights Reserved.</p>
+        
+        {/* CLICKABLE COPYRIGHT */}
+        <p 
+            onClick={() => setPage('admin')} 
+            className="cursor-pointer hover:text-orange-600 transition-colors duration-300 select-none"
+            title="System Access"
+        >
+            &copy; 2026 Arctic Hunter Philippines. All Rights Reserved.
+        </p>
+
         <p>Official Distributor</p>
       </div>
     </footer>

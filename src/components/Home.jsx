@@ -4,55 +4,36 @@ import VoucherSection from './VoucherSection';
 import CategoryGrid from './CategoryGrid';
 import PromoCarousel from './PromoCarousel'; 
 
-// --- IMAGES ---
-import heroCity from '../assets/hero-cityhunter.jpg';
-import heroTough from '../assets/hero-toughmen.jpg';
-import heroLeads from '../assets/hero-leads.jpg';
-// We don't need the qualityImg anymore since we are typing the text!
-
-const Home = ({ setPage, setCategory }) => {
-  // --- SLIDER LOGIC ---
+const Home = ({ setPage, setCategory, slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
-    {
-      id: 1,
-      image: heroCity,
-      title: "City Hunter",
-      subtitle: "Series",
-      desc: "Smart gear for smart students & professionals."
-    },
-    {
-      id: 2,
-      image: heroTough,
-      title: "Tough Men",
-      subtitle: "Series",
-      desc: "Rugged durability meets modern tactical design."
-    },
-    {
-      id: 3,
-      image: heroLeads,
-      title: "The Leads",
-      subtitle: "Series",
-      desc: "Premium aesthetics for the urban leader."
-    }
-  ];
-
-  // Auto-advance slide
+  // Auto-advance slide logic
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      // Check if slides exist to prevent crash if empty
+      if (slides && slides.length > 0) {
+        setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      }
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides]);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    if (slides && slides.length > 0) {
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    if (slides && slides.length > 0) {
+      setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    }
   };
+
+  // Safe check if slides are missing
+  if (!slides || slides.length === 0) {
+    return <div className="bg-black text-white p-20 text-center">Loading Slides...</div>;
+  }
 
   return (
     <div className="animate-fade-in bg-black pb-0">
@@ -125,10 +106,10 @@ const Home = ({ setPage, setCategory }) => {
       {/* 2. VOUCHERS */}
       <VoucherSection />
 
-      {/* 3. CATEGORY GRID (Clean Version) */}
+      {/* 3. CATEGORY GRID */}
       <CategoryGrid setPage={setPage} setCategory={setCategory} />
 
-      {/* 4. PROMO CAROUSEL (New Style's Dropped) */}
+      {/* 4. PROMO CAROUSEL */}
       <PromoCarousel setPage={setPage} />
 
       {/* 5. WORLD CLASS FACILITY (Text Section) */}
