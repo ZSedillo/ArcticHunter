@@ -188,8 +188,8 @@ function App() {
             setPage={handleTabChange} 
             setCategory={navigateToCategory} 
             slides={slides} 
-            categories={categories} // PASS DATA
-            campaigns={campaigns}   // PASS DATA
+            categories={categories}
+            campaigns={campaigns}
           />
         )}
         

@@ -104,7 +104,7 @@ const Home = ({ setPage, setCategory, slides }) => {
       </div>
 
       {/* 2. VOUCHERS */}
-      <VoucherSection />
+      {/* <VoucherSection /> */}
 
       {/* 3. CATEGORY GRID */}
       <CategoryGrid setPage={setPage} setCategory={setCategory} />
