@@ -142,17 +142,14 @@ function App() {
   };
 
   // --- SLIDE HANDLERS
-  const handleAddSlide = () => {
-    const newSlide = {
-      id: Date.now(),
-      image: heroCity, // Default image (you can import a placeholder if you want)
-      title: "NEW CAMPAIGN",
-      subtitle: "SERIES",
-      desc: "Description goes here."
+  const handleAddSlide = (newSlideData) => {
+      const newSlide = {
+        id: Date.now(),
+        ...newSlideData // <--- This spreads the title, subtitle, desc, and image from the modal
+      };
+      setSlides([...slides, newSlide]);
     };
-    setSlides([...slides, newSlide]);
-  };
-
+    
   const handleDeleteSlide = (id) => {
     // Prevent deleting the last slide so the site doesn't break
     if (slides.length <= 1) {
