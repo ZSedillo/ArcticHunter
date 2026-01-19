@@ -29,65 +29,66 @@ import travelImg from './assets/banner-travel.jpg';
 
 // --- INITIAL STATES ---
 const INITIAL_PRODUCTS = [
-  { id: 101, name: 'B00534 Laptop Backpack', category: 'backpack', price: '₱2,699', tag: 'Best Seller' },
-  { id: 102, name: 'Urban Runner Pro', category: 'backpack', price: '₱1,999', tag: 'Featured' },
-  { id: 103, name: 'City Trekker', category: 'backpack', price: '₱3,100', tag: '' },
-  { id: 104, name: 'Campus Elite', category: 'backpack', price: '₱1,499', tag: 'New' },
-  { id: 105, name: 'Tech Commuter', category: 'backpack', price: '₱2,800', tag: '' },
-  { id: 106, name: 'Night Rider', category: 'backpack', price: '₱2,200', tag: '' },
-  { id: 107, name: 'Weekend Warrior', category: 'backpack', price: '₱3,500', tag: 'Hot' },
-  { id: 108, name: 'Nomad X', category: 'backpack', price: '₱4,200', tag: '' },
-  { id: 109, name: 'Student Classic', category: 'backpack', price: '₱1,200', tag: '' },
-  { id: 110, name: 'Pro Gamer Bag', category: 'backpack', price: '₱3,800', tag: 'Limited' },
+  // --- BACKPACKS ---
+  { id: 101, name: 'B00534 Laptop Backpack', category: 'backpack', price: '₱2,699', originalPrice: '₱3,500', tag: 'Best Seller' },
+  { id: 102, name: 'Urban Runner Pro', category: 'backpack', price: '₱1,999', originalPrice: '₱2,500', tag: 'Featured' },
+  { id: 103, name: 'City Trekker', category: 'backpack', price: '₱3,100', originalPrice: '', tag: '' },
+  { id: 104, name: 'Campus Elite', category: 'backpack', price: '₱1,499', originalPrice: '₱1,800', tag: 'New' },
+  { id: 105, name: 'Tech Commuter', category: 'backpack', price: '₱2,800', originalPrice: '', tag: '' },
+  { id: 106, name: 'Night Rider', category: 'backpack', price: '₱2,200', originalPrice: '', tag: '' },
+  { id: 107, name: 'Weekend Warrior', category: 'backpack', price: '₱3,500', originalPrice: '₱4,200', tag: 'Hot' },
+  { id: 108, name: 'Nomad X', category: 'backpack', price: '₱4,200', originalPrice: '', tag: '' },
+  { id: 109, name: 'Student Classic', category: 'backpack', price: '₱1,200', originalPrice: '', tag: '' },
+  { id: 110, name: 'Pro Gamer Bag', category: 'backpack', price: '₱3,800', originalPrice: '₱5,000', tag: 'Limited' },
 
-  // --- SLINGS (6 Items) ---
-  { id: 201, name: 'Chest Pack Pro', category: 'sling', price: '₱1,299', tag: 'Hot' },
-  { id: 202, name: 'Tactical Sling', category: 'sling', price: '₱999', tag: '' },
-  { id: 203, name: 'Daily Rider Sling', category: 'sling', price: '₱1,150', tag: 'New' },
-  { id: 204, name: 'Urban Access Sling', category: 'sling', price: '₱1,400', tag: '' },
-  { id: 205, name: 'Sport Sling X', category: 'sling', price: '₱899', tag: '' },
-  { id: 206, name: 'Anti-Theft Sling', category: 'sling', price: '₱1,600', tag: 'Best Seller' },
+  // --- SLINGS ---
+  { id: 201, name: 'Chest Pack Pro', category: 'sling', price: '₱1,299', originalPrice: '₱1,800', tag: 'Hot' },
+  { id: 202, name: 'Tactical Sling', category: 'sling', price: '₱999', originalPrice: '', tag: '' },
+  { id: 203, name: 'Daily Rider Sling', category: 'sling', price: '₱1,150', originalPrice: '₱1,500', tag: 'New' },
+  { id: 204, name: 'Urban Access Sling', category: 'sling', price: '₱1,400', originalPrice: '', tag: '' },
+  { id: 205, name: 'Sport Sling X', category: 'sling', price: '₱899', originalPrice: '₱1,200', tag: '' },
+  { id: 206, name: 'Anti-Theft Sling', category: 'sling', price: '₱1,600', originalPrice: '₱2,200', tag: 'Best Seller' },
 
-  // --- CROSSBODY (5 Items) ---
-  { id: 301, name: 'Crossbody X-Series', category: 'crossbody', price: '₱1,500', tag: '' },
-  { id: 302, name: 'Slim Body Guard', category: 'crossbody', price: '₱1,100', tag: '' },
-  { id: 303, name: 'Street Cross', category: 'crossbody', price: '₱1,350', tag: 'New' },
-  { id: 304, name: 'Tech Cross', category: 'crossbody', price: '₱1,800', tag: '' },
-  { id: 305, name: 'Vertical Cross', category: 'crossbody', price: '₱1,200', tag: '' },
+  // --- CROSSBODY ---
+  { id: 301, name: 'Crossbody X-Series', category: 'crossbody', price: '₱1,500', originalPrice: '', tag: '' },
+  { id: 302, name: 'Slim Body Guard', category: 'crossbody', price: '₱1,100', originalPrice: '₱1,400', tag: '' },
+  { id: 303, name: 'Street Cross', category: 'crossbody', price: '₱1,350', originalPrice: '₱1,800', tag: 'New' },
+  { id: 304, name: 'Tech Cross', category: 'crossbody', price: '₱1,800', originalPrice: '', tag: '' },
+  { id: 305, name: 'Vertical Cross', category: 'crossbody', price: '₱1,200', originalPrice: '', tag: '' },
 
-  // --- MESSENGER (7 Items) ---
-  { id: 401, name: 'Commuter Series', category: 'messenger', price: '₱2,100', tag: 'Featured' },
-  { id: 402, name: 'Office Messenger', category: 'messenger', price: '₱2,500', tag: '' },
-  { id: 403, name: 'Student Courier', category: 'messenger', price: '₱1,800', tag: '' },
-  { id: 404, name: 'Laptop Briefcase', category: 'messenger', price: '₱2,900', tag: 'Hot' },
-  { id: 405, name: 'Tactical Brief', category: 'messenger', price: '₱2,300', tag: '' },
-  { id: 406, name: 'Satchel Pro', category: 'messenger', price: '₱1,950', tag: '' },
-  { id: 407, name: 'Executive Carry', category: 'messenger', price: '₱3,100', tag: '' },
+  // --- MESSENGER ---
+  { id: 401, name: 'Commuter Series', category: 'messenger', price: '₱2,100', originalPrice: '₱2,800', tag: 'Featured' },
+  { id: 402, name: 'Office Messenger', category: 'messenger', price: '₱2,500', originalPrice: '', tag: '' },
+  { id: 403, name: 'Student Courier', category: 'messenger', price: '₱1,800', originalPrice: '₱2,200', tag: '' },
+  { id: 404, name: 'Laptop Briefcase', category: 'messenger', price: '₱2,900', originalPrice: '₱3,800', tag: 'Hot' },
+  { id: 405, name: 'Tactical Brief', category: 'messenger', price: '₱2,300', originalPrice: '', tag: '' },
+  { id: 406, name: 'Satchel Pro', category: 'messenger', price: '₱1,950', originalPrice: '', tag: '' },
+  { id: 407, name: 'Executive Carry', category: 'messenger', price: '₱3,100', originalPrice: '', tag: '' },
 
-  // --- POUCHES (8 Items) ---
-  { id: 501, name: 'Tactical Pouch', category: 'pouch', price: '₱499', tag: '' },
-  { id: 502, name: 'Tech Organizer', category: 'pouch', price: '₱650', tag: 'Must Have' },
-  { id: 503, name: 'Cable Pouch Pro', category: 'pouch', price: '₱350', tag: '' },
-  { id: 504, name: 'Utility Kit', category: 'pouch', price: '₱700', tag: '' },
-  { id: 505, name: 'Wash Bag', category: 'pouch', price: '₱550', tag: '' },
-  { id: 506, name: 'Mini Pouch', category: 'pouch', price: '₱250', tag: '' },
-  { id: 507, name: 'Hard Shell Case', category: 'pouch', price: '₱800', tag: 'New' },
-  { id: 508, name: 'Accessory Bag', category: 'pouch', price: '₱400', tag: '' },
+  // --- POUCHES ---
+  { id: 501, name: 'Tactical Pouch', category: 'pouch', price: '₱499', originalPrice: '', tag: '' },
+  { id: 502, name: 'Tech Organizer', category: 'pouch', price: '₱650', originalPrice: '₱900', tag: 'Must Have' },
+  { id: 503, name: 'Cable Pouch Pro', category: 'pouch', price: '₱350', originalPrice: '₱500', tag: '' },
+  { id: 504, name: 'Utility Kit', category: 'pouch', price: '₱700', originalPrice: '', tag: '' },
+  { id: 505, name: 'Wash Bag', category: 'pouch', price: '₱550', originalPrice: '', tag: '' },
+  { id: 506, name: 'Mini Pouch', category: 'pouch', price: '₱250', originalPrice: '', tag: '' },
+  { id: 507, name: 'Hard Shell Case', category: 'pouch', price: '₱800', originalPrice: '₱1,200', tag: 'New' },
+  { id: 508, name: 'Accessory Bag', category: 'pouch', price: '₱400', originalPrice: '', tag: '' },
 
-  // --- WALLETS (5 Items) ---
-  { id: 601, name: 'Tech Wallet', category: 'wallet', price: '₱850', tag: '' },
-  { id: 602, name: 'Card Holder Pro', category: 'wallet', price: '₱450', tag: 'New' },
-  { id: 603, name: 'Bifold Shield', category: 'wallet', price: '₱900', tag: '' },
-  { id: 604, name: 'Zip Wallet', category: 'wallet', price: '₱750', tag: '' },
-  { id: 605, name: 'Travel Wallet', category: 'wallet', price: '₱1,100', tag: '' },
+  // --- WALLETS ---
+  { id: 601, name: 'Tech Wallet', category: 'wallet', price: '₱850', originalPrice: '', tag: '' },
+  { id: 602, name: 'Card Holder Pro', category: 'wallet', price: '₱450', originalPrice: '₱700', tag: 'New' },
+  { id: 603, name: 'Bifold Shield', category: 'wallet', price: '₱900', originalPrice: '₱1,200', tag: '' },
+  { id: 604, name: 'Zip Wallet', category: 'wallet', price: '₱750', originalPrice: '', tag: '' },
+  { id: 605, name: 'Travel Wallet', category: 'wallet', price: '₱1,100', originalPrice: '', tag: '' },
 
-  // --- TRAVEL (6 Items) ---
-  { id: 701, name: 'Travel Duffel', category: 'travel', price: '₱3,200', tag: 'Heavy Duty' },
-  { id: 702, name: 'Gym Duffel Pro', category: 'travel', price: '₱2,400', tag: '' },
-  { id: 703, name: 'Weekender Bag', category: 'travel', price: '₱3,500', tag: 'Hot' },
-  { id: 704, name: 'Carry-On Master', category: 'travel', price: '₱4,100', tag: '' },
-  { id: 705, name: 'Sport Hauler', category: 'travel', price: '₱2,100', tag: '' },
-  { id: 706, name: 'Expedition Bag', category: 'travel', price: '₱5,000', tag: 'Exclusive' },
+  // --- TRAVEL ---
+  { id: 701, name: 'Travel Duffel', category: 'travel', price: '₱3,200', originalPrice: '₱4,500', tag: 'Heavy Duty' },
+  { id: 702, name: 'Gym Duffel Pro', category: 'travel', price: '₱2,400', originalPrice: '', tag: '' },
+  { id: 703, name: 'Weekender Bag', category: 'travel', price: '₱3,500', originalPrice: '₱4,800', tag: 'Hot' },
+  { id: 704, name: 'Carry-On Master', category: 'travel', price: '₱4,100', originalPrice: '', tag: '' },
+  { id: 705, name: 'Sport Hauler', category: 'travel', price: '₱2,100', originalPrice: '', tag: '' },
+  { id: 706, name: 'Expedition Bag', category: 'travel', price: '₱5,000', originalPrice: '₱6,500', tag: 'Exclusive' },
 ];
 
 const INITIAL_SLIDES = [

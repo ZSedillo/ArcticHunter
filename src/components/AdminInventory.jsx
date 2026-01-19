@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Search, Upload } from 'lucide-react';
-import placeholderImg from '../assets/cat-backpack.jpg';
-import ConfirmModal from './ConfirmModal'; // <--- Import the Modal
+import { Plus, Edit, Trash2, Search, Upload, Tag } from 'lucide-react';
+import placeholderImg from '../assets/cat-backpack.jpg'; // Ensure extension matches your file
+import ConfirmModal from './ConfirmModal';
 
 const AdminInventory = ({ products, onAdd, onUpdate, onDelete, showToast }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // --- UPDATED STATE: Includes price fields ---
   const [formData, setFormData] = useState({
-    id: '', name: '', category: 'backpack', tag: 'New', image: null
+    id: '', 
+    name: '', 
+    category: 'backpack', 
+    price: '',          // Selling Price
+    originalPrice: '',  // For Discounts
+    tag: '', 
+    image: null
   });
 
-  // --- NEW: MODAL STATE ---
+  // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
@@ -39,7 +47,8 @@ const AdminInventory = ({ products, onAdd, onUpdate, onDelete, showToast }) => {
       showToast('New Asset Added');
     }
     setIsEditing(false);
-    setFormData({ id: '', name: '', category: 'backpack', tag: '', image: null });
+    // Reset form
+    setFormData({ id: '', name: '', category: 'backpack', price: '', originalPrice: '', tag: '', image: null });
   };
 
   const handleEdit = (product) => {
@@ -48,10 +57,9 @@ const AdminInventory = ({ products, onAdd, onUpdate, onDelete, showToast }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // --- NEW: DELETE HANDLERS ---
   const handleDeleteClick = (id) => {
-    setItemToDelete(id);   // 1. Remember which item
-    setIsModalOpen(true);  // 2. Open the modal
+    setItemToDelete(id);   
+    setIsModalOpen(true);  
   };
 
   const confirmDelete = () => {
@@ -79,6 +87,22 @@ const AdminInventory = ({ products, onAdd, onUpdate, onDelete, showToast }) => {
                     <input required type="text" className="w-full bg-black border border-white/10 p-3 text-white text-sm rounded focus:border-orange-600 outline-none" 
                         value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
                 </div>
+
+                {/* --- PRICING INPUTS --- */}
+                <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                        <label className="text-[10px] font-bold uppercase text-zinc-500">Price (Selling)</label>
+                        <input required type="text" placeholder="₱0.00" className="w-full bg-black border border-white/10 p-3 text-white text-sm rounded focus:border-orange-600 outline-none" 
+                            value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} />
+                    </div>
+                    <div className="space-y-1">
+                        <label className="text-[10px] font-bold uppercase text-zinc-500">Original Price</label>
+                        <input type="text" placeholder="(Optional)" className="w-full bg-black border border-white/10 p-3 text-zinc-400 text-sm rounded focus:border-orange-600 outline-none placeholder:text-zinc-700" 
+                            value={formData.originalPrice || ''} onChange={(e) => setFormData({...formData, originalPrice: e.target.value})} />
+                    </div>
+                </div>
+                {/* ---------------------- */}
+
                 <div className="space-y-1">
                     <label className="text-[10px] font-bold uppercase text-zinc-500">Category</label>
                     <select className="w-full bg-black border border-white/10 p-3 text-white text-sm rounded focus:border-orange-600 outline-none"
@@ -107,7 +131,7 @@ const AdminInventory = ({ products, onAdd, onUpdate, onDelete, showToast }) => {
                 <button className="w-full bg-white text-black font-bold py-3 uppercase tracking-widest text-xs rounded hover:bg-orange-600 hover:text-white transition-all">
                     {isEditing ? 'Save Changes' : 'Initialize Upload'}
                 </button>
-                {isEditing && <button type="button" onClick={() => {setIsEditing(false); setFormData({id: '', name: '', category: 'backpack', tag: '', image: null})}} className="w-full text-zinc-500 text-[10px] uppercase py-2 hover:text-white">Cancel</button>}
+                {isEditing && <button type="button" onClick={() => {setIsEditing(false); setFormData({id: '', name: '', category: 'backpack', price: '', originalPrice: '', tag: '', image: null})}} className="w-full text-zinc-500 text-[10px] uppercase py-2 hover:text-white">Cancel</button>}
              </form>
           </div>
         </div>
@@ -127,11 +151,28 @@ const AdminInventory = ({ products, onAdd, onUpdate, onDelete, showToast }) => {
                        </div>
                        <div className="flex-grow">
                            <h4 className="text-white font-bold text-sm truncate">{item.name}</h4>
-                           <span className="text-[10px] uppercase text-zinc-500 tracking-wider bg-black/40 px-2 py-0.5 rounded">{item.category}</span>
+                           
+                           <div className="flex items-center gap-2 mt-1 mb-2">
+                                <span className="text-[10px] uppercase text-zinc-500 tracking-wider bg-black/40 px-2 py-0.5 rounded">{item.category}</span>
+                                {item.tag && <span className="text-[9px] uppercase font-bold text-orange-500 flex items-center gap-1"><Tag className="w-3 h-3"/> {item.tag}</span>}
+                           </div>
+
+                           {/* --- DISPLAY PRICE IN LIST --- */}
+                           <div className="font-mono text-sm">
+                                {item.originalPrice ? (
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-white font-bold">{item.price}</span>
+                                        <span className="text-zinc-600 line-through text-xs">{item.originalPrice}</span>
+                                    </div>
+                                ) : (
+                                    <span className="text-zinc-400">{item.price}</span>
+                                )}
+                           </div>
+                           {/* ----------------------------- */}
+
                        </div>
                        <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                            <button onClick={() => handleEdit(item)} className="p-2 bg-black text-blue-400 rounded hover:bg-blue-600 hover:text-white"><Edit className="w-3 h-3" /></button>
-                           {/* --- TRIGGER DELETE MODAL HERE --- */}
                            <button onClick={() => handleDeleteClick(item.id)} className="p-2 bg-black text-red-400 rounded hover:bg-red-600 hover:text-white"><Trash2 className="w-3 h-3" /></button>
                        </div>
                    </div>
@@ -140,7 +181,6 @@ const AdminInventory = ({ products, onAdd, onUpdate, onDelete, showToast }) => {
         </div>
       </div>
 
-      {/* --- RENDER MODAL --- */}
       <ConfirmModal 
         isOpen={isModalOpen}
         title="Delete Item?"
